@@ -1,0 +1,57 @@
+﻿@model Serwis.Models.Customers
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Customers</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SerialNumber" />
+            
+            <div class="form-group">
+                <label asp-for="ClientForeName" class="control-label"></label>
+                <input asp-for="ClientForeName" class="form-control" />
+                <span asp-validation-for="ClientForeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientSureName" class="control-label"></label>
+                <input asp-for="ClientSureName" class="form-control" />
+                <span asp-validation-for="ClientSureName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcceptanceDate" class="control-label"></label>
+                <input asp-for="AcceptanceDate" class="form-control" />
+                <span asp-validation-for="AcceptanceDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueDescription" class="control-label"></label>
+                <input asp-for="IssueDescription" class="form-control" />
+                <span asp-validation-for="IssueDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

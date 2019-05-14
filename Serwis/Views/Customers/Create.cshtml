@@ -1,0 +1,72 @@
+﻿@model Serwis.Models.Customers
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<style>
+   div{
+        font-size:12px !important;
+    }
+   input{
+       height:36px !important;
+   }
+</style>
+
+    <div class="row" style="width:99%;">
+        <div style="margin-left:5%;margin-top:5%;">
+            <a asp-action="Index" class="btn btn-primary" style="height:36px;">Strona startowa</a><br />
+            <a asp-action="Login" class="btn btn-primary" style="height:36px;margin-top:2%;">Wyloguj się</a>
+        </div>
+        <div class="col-md-4" style="width:75%;margin:auto;">
+            
+            <center><img src="https://unixtitan.net/images/maze-clipart-red-6.png" style="width:50%;height:50%;" /></center>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="SerialNumber" class="control-label"></label>
+                    <input asp-for="SerialNumber" class="form-control" />
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClientForeName" class="control-label"></label>
+                    <input asp-for="ClientForeName" class="form-control" />
+                    <span asp-validation-for="ClientForeName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClientSureName" class="control-label"></label>
+                    <input asp-for="ClientSureName" class="form-control" />
+                    <span asp-validation-for="ClientSureName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AcceptanceDate" class="control-label"></label>
+                    <input asp-for="AcceptanceDate" class="form-control" />
+                    <span asp-validation-for="AcceptanceDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IssueDescription" class="control-label"></label>
+                    <input asp-for="IssueDescription" class="form-control" />
+                    <span asp-validation-for="IssueDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="State" class="control-label"></label>
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo" class="control-label"></label>
+                    <input asp-for="Photo" class="form-control" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <center> <input type="submit" value="Dodaj" class="btn btn-primary" /></center>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<div>
+    
+</div>
+

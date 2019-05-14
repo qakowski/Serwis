@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Serwis.Models.Customers>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    #container {
+        font-size: 12px !important;
+    }
+</style>
+<div id="container">
+    <div style="width:auto;margin:0 auto;">
+        <center><img src="https://unixtitan.net/images/maze-clipart-red-6.png" style="width:15%;height:15%;" /></center>
+    </div>
+    <p style="padding-top:1%;">
+        <a asp-action="Create" class="btn btn-primary" style="float:left;margin-left:5%;">Dodaj komputer</a>
+        <a asp-action="Login" class="btn btn-primary" style="float:right;margin-right:5%;">Wyloguj się</a>
+    </p>
+   
+    <form style="padding-top:1%;">
+        <hr />
+        <p style="float:right;display:inline-block;">Nazwa klienta: <input type="text" />&nbsp&nbsp&nbsp&nbspNumer seryjny:<input type="text" />&nbsp&nbsp<input type="submit" value="Szukaj" class="btn btn-secondary" />&nbsp</p>
+    </form>
+    <table class="table" style="padding-top:10%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SerialNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientForeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientSureName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AcceptanceDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SerialNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientForeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientSureName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AcceptanceDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssueDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        <img style="width:200px; height:50px" src="@Html.DisplayFor(modelItem => item.Photo)" />
+                    </td>
+                    @*<td>
+                            <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.SerialNumber">Detale</a>
+                            <a class="btn btn-secondary" asp-action="Delete" asp-route-id="@item.SerialNumber">Usuń</a>
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

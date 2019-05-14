@@ -1,0 +1,57 @@
+﻿@model Serwis.Models.Customers
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientForeName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClientForeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientSureName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClientSureName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AcceptanceDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AcceptanceDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IssueDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IssueDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+        <dd>
+            <img style="width:200px; height:50px" src="@Html.DisplayFor(model => model.Photo)" />
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SerialNumber">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
