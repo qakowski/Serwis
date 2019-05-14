@@ -14,7 +14,7 @@ namespace Serwis.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"data source=DESKTOP-EB7HH30;initial catalog=Serwis;integrated security=True;multipleactiveresultsets=True;");
+            optionsBuilder.UseSqlServer(@"data source=(local);initial catalog=Serwis;integrated security=True;multipleactiveresultsets=True;");
         }
 
        
