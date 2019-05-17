@@ -78,15 +78,36 @@ namespace Serwis.Controllers
             if (file == null || file.Length == 0)
                 return Content("file not selected");
 
-            var path = Path.Combine(
+           
+            if (System.IO.File.Exists(Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/images",
+                        file.FileName)))
+            {
+                string fileName = "1" + file.FileName ;
+                var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/images",
+                        fileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+
+                    await file.CopyToAsync(stream);
+                }
+                customers.Photo = fileName;
+            }
+            else
+            {
+                var path = Path.Combine(
                         Directory.GetCurrentDirectory(), "wwwroot/images",
                         file.FileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
+                    await file.CopyToAsync(stream);
+                }
+                customers.Photo = file.FileName;
             }
-            customers.Photo = file.FileName;
+          
+            
 
 
 
