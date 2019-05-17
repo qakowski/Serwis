@@ -193,6 +193,14 @@ namespace Serwis.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var customers = await _context.Customers.SingleOrDefaultAsync(m => m.SerialNumber == id);
+            var path = Path.Combine(
+                       Directory.GetCurrentDirectory(), "wwwroot/images",
+                       customers.Photo);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+
             _context.Customers.Remove(customers);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
