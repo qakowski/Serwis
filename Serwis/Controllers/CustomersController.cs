@@ -68,21 +68,25 @@ namespace Serwis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SerialNumber,ClientForeName,ClientSureName,AcceptanceDate,IssueDescription,State,Photo")] Models.Customers customers, IFormFile file) 
         {
+            //string pathToImages = "wwwroot/images/";
+            //using (var stream = new FileStream(pathToImages, FileMode.Create))
+            //{
+            //    await file.CopyToAsync(stream);
+            //}
 
-       
+            //customers.Photo = file.FileName;
+            if (file == null || file.Length == 0)
+                return Content("file not selected");
 
-            var filePath = Path.GetTempFileName();
-            
-            string pathToImages = _appEnvironment.WebRootPath+ "/images/";
+            var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/images",
+                        file.FileName);
 
-            using (var stream = new FileStream(pathToImages, FileMode.Create))
+            using (var stream = new FileStream(path, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
-
-            customers.Photo = filePath;
-
-
+            customers.Photo = file.FileName;
 
 
 

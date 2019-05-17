@@ -44,12 +44,13 @@
                     @Html.DisplayNameFor(model => model.Photo)
                 </dt>
                 <dd>
-                    <img  src="~/images/@Url.Content(Model.Photo)" />
+                    <img style="max-width:500px;max-height:500px; height:auto;width:auto;"  src="~/images/@Url.Content(Model.Photo)" />
                 </dd>
             </dl>
         </div>
         <div>
             @*<a asp-action="Edit" asp-route-id="@Model.SerialNumber">Edit</a>*@
             <a asp-action="Index" class="btn btn-primary">Powrót</a>
+            <a asp-action="Delete" asp-route-id="@Model.SerialNumber" class="btn btn-primary">Usuń</a>
         </div>
     </center>
