@@ -4,9 +4,40 @@
 @{
     ViewData["Title"] = "Strona główna";
 }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#table tr').click(function () {
+            var href = $(this).find("a").attr("href");
+            if (href) {
+                window.location = href;
+            }
+        })
+    })
+
+</script>
+
+
 <style>
     #container {
         font-size: 12px !important;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgb(52, 49, 49);
+    }
+
+    tr:nth-child(odd):hover {
+        background-color: rgb(221, 221, 221);
+        color: rgb(0, 0, 0);
+        transition: 1.2s;
+    }
+
+    tr:nth-child(even):hover {
+        background-color: rgb(225, 221, 221);
+        color: rgb(0, 0, 0);
+        transition: 1.2s;
     }
 </style>
 <div id="container">
@@ -17,14 +48,19 @@
         <a asp-action="Create" class="btn btn-primary" style="float:left;margin-left:5%;">Dodaj komputer</a>
         <a asp-action="Login" class="btn btn-primary" style="float:right;margin-right:5%;">Wyloguj się</a>
     </p>
-   
+
     <form style="padding-top:1%;">
         <hr />
-        <p style="float:right;display:inline-block;">Nazwa klienta: <input type="text" />&nbsp&nbsp&nbsp&nbspNumer seryjny:<input type="text" />&nbsp&nbsp<input type="submit" value="Szukaj" class="btn btn-secondary" />&nbsp</p>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <p style="float:right;display:inline-block;">Nazwa klienta: @Html.TextBox("name")&nbsp&nbsp&nbsp&nbspNumer seryjny:@Html.TextBox("number")&nbsp&nbsp<input type="submit" value="Szukaj" class="btn btn-secondary" />&nbsp</p>
+        }
+
     </form>
-    <table class="table" style="padding-top:10%">
+    <table class="table" id="table" style="padding-top:10%">
         <thead>
             <tr>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.SerialNumber)
                 </th>
@@ -52,33 +88,37 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SerialNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientForeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientSureName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AcceptanceDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IssueDescription)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
-                    </td>
-                    <td>
-                        <img style="width:200px; height:50px" src="@Html.DisplayFor(modelItem => item.Photo)" />
-                    </td>
-                    @*<td>
-                            <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.SerialNumber">Detale</a>
-                            <a class="btn btn-secondary" asp-action="Delete" asp-route-id="@item.SerialNumber">Usuń</a>
-                        </td>*@
-                </tr>
+                
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientForeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientSureName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcceptanceDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssueDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    <img style="width:200px; height:50px" src="~/images/@Html.DisplayFor(modelItem => item.Photo)" />
+                </td>
+                <td>
+        <a  asp-action="Details" asp-route-id="@item.SerialNumber"></a>
+         @*<a class="btn btn-secondary" asp-action="Delete" asp-route-id="@item.SerialNumber"></a>*@
+                </td>
+
+            </tr>
+             
             }
         </tbody>
     </table>

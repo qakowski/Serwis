@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,17 +15,17 @@ namespace Serwis.Controllers
     public class CustomersController : Controller
     {
         Service _context = new Service();
-       
-        public CustomersController()
+        private readonly IHostingEnvironment _appEnvironment;
+        public CustomersController(IHostingEnvironment appEnvironment)
         {
-            
+            _appEnvironment = appEnvironment;
             _context.Customers.Load();   
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name, string number)
         {
-            return View(await _context.Customers.ToListAsync());
+            return View(_context.Customers.Where(x => (x.ClientForeName + " " + x.ClientSureName).Contains(name) || name == null).Where(x => x.SerialNumber.Contains(number) || number == null).ToList());
         }
 
         // GET: Customers/Details/5
@@ -53,18 +55,61 @@ namespace Serwis.Controllers
         {
             return Redirect("Login/Login");
         }
+
+
+
         // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SerialNumber,ClientForeName,ClientSureName,AcceptanceDate,IssueDescription,State,Photo")] Models.Customers customers)
+        public async Task<IActionResult> Create([Bind("SerialNumber,ClientForeName,ClientSureName,AcceptanceDate,IssueDescription,State,Photo")] Models.Customers customers, IFormFile file) 
         {
-            if (ModelState.IsValid)
+
+       
+
+            var filePath = Path.GetTempFileName();
+            
+            string pathToImages = _appEnvironment.WebRootPath+ "/images/";
+
+            using (var stream = new FileStream(pathToImages, FileMode.Create))
             {
-                _context.Add(customers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await file.CopyToAsync(stream);
+            }
+
+            customers.Photo = filePath;
+
+
+
+
+
+            string acceptTmp = customers.AcceptanceDate.ToString();
+            if(DateTime.TryParse(acceptTmp, out DateTime tempDate)){
+                if (ModelState.IsValid)
+                {
+
+                    _context.Add(customers);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+
+                }
+            }
+        else
+            {
+                if (ModelState.IsValid)
+                {
+                    customers.AcceptanceDate = DateTime.Now;
+                    _context.Add(customers);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+
+                }
+
             }
             return View(customers);
         }

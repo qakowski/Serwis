@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Web;
 namespace Serwis.Models
 {
     public class Customers 
@@ -34,9 +34,12 @@ namespace Serwis.Models
         [Display(Name="Stan")]
         public string State { get; set; }
 
-        [Required]
+        
         [Display(Name="Zdjęcie")]
         public string Photo { get; set; }
+
+        
+        
 
     }
 }

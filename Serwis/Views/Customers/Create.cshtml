@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="AcceptanceDate" class="control-label"></label>
-                    <input asp-for="AcceptanceDate" class="form-control" />
+                    <input asp-for="AcceptanceDate" placeholder="dd.mm.rrrr --:--" class="form-control datepicker" />
                     <span asp-validation-for="AcceptanceDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -55,9 +55,11 @@
                     <span asp-validation-for="State" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    @*<label asp-for="Photo" class="control-label"></label>
+        <input asp-for="Photo" type="file" class="form-control-file" />
+        <span asp-validation-for="Photo" class="text-danger"></span>*@
                     <label asp-for="Photo" class="control-label"></label>
-                    <input asp-for="Photo" class="form-control" />
-                    <span asp-validation-for="Photo" class="text-danger"></span>
+                    <input type="file" class="form-control-file" />
                 </div>
                 <div class="form-group">
                     <center> <input type="submit" value="Dodaj" class="btn btn-primary" /></center>
