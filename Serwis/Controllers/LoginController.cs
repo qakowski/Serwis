@@ -33,8 +33,8 @@ namespace Serwis.Controllers
                 var usr = db.Users.Where(p => p.Login == user.Login && p.Password == user.Password).FirstOrDefault();
                 if (usr != null)
                 {
-                   
-                    HttpContext.Session.SetString("Id", usr.Id.ToString());
+
+                    HttpContext.Session.SetInt32("_Id", usr.Id);
                    // HttpContext.Session.SetString("Login", usr.Login);
                     return Redirect("Customers/Index");
                 }

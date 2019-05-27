@@ -21,14 +21,14 @@ namespace Serwis.Controllers
         public CustomersController(IHostingEnvironment appEnvironment, IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-            if (_session.Id != null)
+            if (_session.GetInt32("_Id") != null)
             {
                 _appEnvironment = appEnvironment;
                 _context.Customers.Load();
             }
             else
             {
-                RedirectToAction("Logout");
+                Logout();
             }
         }
 
@@ -67,13 +67,13 @@ namespace Serwis.Controllers
         //    return Redirect("Login/Login");
         //}
 
-        public IActionResult Logout()
+        public void Logout()
         {
-            if (_session.GetString("Id")!=null)
+            if (_session.GetInt32("_Id")!=null)
             {
                 _session.Clear();
             }
-            return RedirectToAction("Login", "Login");
+            RedirectToAction("Login", "Login");
         }
 
         // POST: Customers/Create
