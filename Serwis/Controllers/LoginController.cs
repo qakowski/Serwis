@@ -11,6 +11,7 @@ namespace Serwis.Controllers
 {
     public class LoginController : Controller
     {
+    
         public IActionResult Index()
         {
             return View();
@@ -32,8 +33,9 @@ namespace Serwis.Controllers
                 var usr = db.Users.Where(p => p.Login == user.Login && p.Password == user.Password).FirstOrDefault();
                 if (usr != null)
                 {
+                   
                     HttpContext.Session.SetString("Id", usr.Id.ToString());
-                    HttpContext.Session.SetString("Login", usr.Login);
+                   // HttpContext.Session.SetString("Login", usr.Login);
                     return Redirect("Customers/Index");
                 }
                 else
@@ -44,19 +46,6 @@ namespace Serwis.Controllers
             return View();
         }
 
-        public IActionResult LoggedIn()
-        {
-           
-            if(HttpContext.Session.Get("Id") != null)
-            {
 
-                ViewBag.Message = HttpContext.Session.Get("Login");
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Customers");
-            }
-        }
     }
 }

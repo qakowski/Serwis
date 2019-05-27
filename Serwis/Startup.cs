@@ -25,6 +25,7 @@ namespace Serwis
         {
             if (env.IsDevelopment())
             {
+                _ = app.UseSession();
                 app.UseStaticFiles();
                 app.UseDeveloperExceptionPage();
             }

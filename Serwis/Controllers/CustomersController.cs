@@ -15,11 +15,21 @@ namespace Serwis.Controllers
     public class CustomersController : Controller
     {
         Service _context = new Service();
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ISession _session => _httpContextAccessor.HttpContext.Session;
         private readonly IHostingEnvironment _appEnvironment;
-        public CustomersController(IHostingEnvironment appEnvironment)
+        public CustomersController(IHostingEnvironment appEnvironment, IHttpContextAccessor httpContextAccessor)
         {
-            _appEnvironment = appEnvironment;
-            _context.Customers.Load();   
+            _httpContextAccessor = httpContextAccessor;
+            if (_session.Id != null)
+            {
+                _appEnvironment = appEnvironment;
+                _context.Customers.Load();
+            }
+            else
+            {
+                RedirectToAction("Logout");
+            }
         }
 
         // GET: Customers
@@ -51,12 +61,20 @@ namespace Serwis.Controllers
         {
             return View();
         }
-        public IActionResult Login()
+
+        //public IActionResult Login()
+        //{
+        //    return Redirect("Login/Login");
+        //}
+
+        public IActionResult Logout()
         {
-            return Redirect("Login/Login");
+            if (_session.GetString("Id")!=null)
+            {
+                _session.Clear();
+            }
+            return RedirectToAction("Login", "Login");
         }
-
-
 
         // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -68,13 +86,6 @@ namespace Serwis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SerialNumber,ClientForeName,ClientSureName,AcceptanceDate,IssueDescription,State,Photo")] Models.Customers customers, IFormFile file) 
         {
-            //string pathToImages = "wwwroot/images/";
-            //using (var stream = new FileStream(pathToImages, FileMode.Create))
-            //{
-            //    await file.CopyToAsync(stream);
-            //}
-
-            //customers.Photo = file.FileName;
             if (file == null || file.Length == 0)
                 return Content("file not selected");
 

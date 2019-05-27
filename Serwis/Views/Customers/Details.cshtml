@@ -3,54 +3,56 @@
 @{
     ViewData["Title"] = "Details";
 }
-    <center>
-        <h2>Informacje o kliencie</h2>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<center>
+    <h2>Informacje o kliencie</h2>
 
-        <div>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.SerialNumber)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.SerialNumber)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.ClientForeName)  @Html.DisplayNameFor(model => model.ClientSureName)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.ClientForeName)      @Html.DisplayFor(model => model.ClientSureName)
-                </dd>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SerialNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ClientForeName)  @Html.DisplayNameFor(model => model.ClientSureName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ClientForeName)      @Html.DisplayFor(model => model.ClientSureName)
+            </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.AcceptanceDate)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.AcceptanceDate)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.IssueDescription)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.IssueDescription)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.State)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.State)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Photo)
-                </dt>
-                <dd>
-                    <img style="max-width:500px;max-height:500px; height:auto;width:auto;"  src="~/images/@Url.Content(Model.Photo)" />
-                </dd>
-            </dl>
-        </div>
-        <div>
-            @*<a asp-action="Edit" asp-route-id="@Model.SerialNumber">Edit</a>*@
-            <a asp-action="Index" class="btn btn-primary">Powrót</a>
-            <a asp-action="Delete" asp-route-id="@Model.SerialNumber" class="btn btn-primary">Usuń</a>
-        </div>
-    </center>
+            <dt>
+                @Html.DisplayNameFor(model => model.AcceptanceDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AcceptanceDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IssueDescription)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IssueDescription)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.State)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.State)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Photo)
+            </dt>
+            <dd>
+                <img style="max-width:500px;max-height:500px; height:auto;width:auto;" src="~/images/@Url.Content(Model.Photo)" />
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @*<a asp-action="Edit" asp-route-id="@Model.SerialNumber">Edit</a>*@
+        <a asp-action="Index" class="btn btn-primary">Powrót</a>
+        <a asp-action="Delete" asp-route-id="@Model.SerialNumber" class="btn btn-primary">Usuń</a>
+    </div>
+
+</center>
