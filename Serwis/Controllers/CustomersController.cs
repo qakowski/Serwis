@@ -67,13 +67,13 @@ namespace Serwis.Controllers
         //    return Redirect("Login/Login");
         //}
 
-        public void Logout()
+        public IActionResult Logout()
         {
             if (_session.GetInt32("_Id")!=null)
             {
                 _session.Clear();
             }
-            RedirectToAction("Login", "Login");
+            return RedirectToAction("Login", "Login");
         }
 
         // POST: Customers/Create

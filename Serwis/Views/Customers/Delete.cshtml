@@ -7,6 +7,7 @@
 
 <center>
 <h3>Na pewno chcesz usunąć ten element?</h3>
+    <br />
 <div>
     @*<h4>Customers</h4>
         <hr />
@@ -50,10 +51,10 @@
         </dl>*@
 
     @Html.DisplayFor(model => model.SerialNumber)
-
+    <br />
     <form asp-action="Delete">
         <input type="hidden" asp-for="SerialNumber" />
-        <input type="submit" value="Delete" class="btn btn-primary" /> 
+        <input type="submit" value="Usuń" class="btn btn-primary" /> 
         <a asp-action="Index" class="btn btn-primary" >Wróć</a>
     </form>
 </div>
